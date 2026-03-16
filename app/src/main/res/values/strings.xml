@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Aura</string>
+    <string name="notification_listener_label">Aura Notification Access</string>
+
+    <!-- Main Activity -->
+    <string name="status_running">Aura is running</string>
+    <string name="status_stopped">Aura is stopped</string>
+    <string name="context_label">Context: %1$s</string>
+    <string name="btn_start_listening">Start Listening</string>
+    <string name="btn_stop_service">Stop Aura</string>
+    <string name="permissions_required_message">Aura needs microphone and contact permissions to work correctly.</string>
+
+    <!-- Settings Activity -->
+    <string name="settings_title">Settings</string>
+    <string name="section_trusted_contacts">Trusted Contacts</string>
+    <string name="empty_trusted_contacts">No trusted contacts yet.\nTap + to add one.</string>
+    <string name="add_contact_title">Add Trusted Contact</string>
+    <string name="edit_contact_title">Edit Contact</string>
+    <string name="delete_contact_title">Delete Contact</string>
+    <string name="delete_contact_message">Remove %1$s from your trusted contacts?</string>
+    <string name="hint_contact_name">Contact Name</string>
+    <string name="hint_phone_number">Phone Number</string>
+    <string name="error_fields_required">Name and phone number are required.</string>
+    <string name="btn_edit_contact">Edit</string>
+    <string name="btn_delete_contact">Delete</string>
+
+    <!-- Dialogs / Actions -->
+    <string name="add">Add</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="open_settings">Open Settings</string>
+
+    <!-- Menu -->
+    <string name="menu_settings">Settings</string>
+    <string name="menu_notification_access">Notification Access</string>
+
+    <!-- Notification Access -->
+    <string name="notification_access_title">Notification Access</string>
+    <string name="notification_access_message">Aura needs notification access to make proactive suggestions while driving. Would you like to open the notification access settings?</string>
+</resources>
