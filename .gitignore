@@ -1,0 +1,29 @@
+# Gradle
+.gradle/
+build/
+**/build/
+
+# Local configuration
+local.properties
+*.keystore
+*.jks
+
+# IDE files
+.idea/
+*.iml
+.DS_Store
+*.swp
+
+# Android Studio
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.ap_
+
+# Kotlin
+*.class
+
+# Node (if any tooling is added)
+node_modules/

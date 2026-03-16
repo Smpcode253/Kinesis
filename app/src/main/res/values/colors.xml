@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary brand color — violet (Aura brand) -->
+    <color name="colorPrimary">#8A2BE2</color>
+    <color name="colorPrimaryDark">#6A0DAD</color>
+    <color name="colorPrimaryVariant">#6A0DAD</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+
+    <!-- Secondary color -->
+    <color name="colorSecondary">#03DAC5</color>
+    <color name="colorSecondaryVariant">#018786</color>
+    <color name="colorOnSecondary">#000000</color>
+
+    <!-- Background -->
+    <color name="colorBackground">#FAFAFA</color>
+    <color name="colorOnBackground">#1C1B1F</color>
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorOnSurface">#1C1B1F</color>
+
+    <!-- Error -->
+    <color name="colorError">#B00020</color>
+    <color name="colorOnError">#FFFFFF</color>
+</resources>

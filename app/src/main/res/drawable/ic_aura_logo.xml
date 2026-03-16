@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Aura logo for the main screen — a stylised violet circle with "A" -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    <!-- Background circle -->
+    <path
+        android:fillColor="#8A2BE2"
+        android:pathData="M60,0 A60,60 0 1,1 60,120 A60,60 0 1,1 60,0 Z" />
+    <!-- Stylised "A" glyph -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M60,20L30,95h12l5,-14h26l5,14h12L60,20zM51,70L60,42 69,70H51z" />
+</vector>
