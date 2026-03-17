@@ -1,4 +1,6 @@
-name: Android CI Build
+# GitHub Actions workflow for building, testing, and releasing the Kinesis Android app
+
+name: Android CI/CD
 
 on:
   push:
@@ -7,7 +9,9 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  # This job runs on every push and pull request to 'main'
+  ci:
+    name: Build & Test
     runs-on: ubuntu-latest
 
     steps:
@@ -24,14 +28,69 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    - name: Build with Gradle
-      run: ./gradlew build
+    - name: Run Android Lint
+      run: ./gradlew lintDebug
 
-    - name: Assemble debug APK
-      run: ./gradlew assembleDebug
+    - name: Run unit tests
+      run: ./gradlew testDebugUnitTest
 
-    - name: Upload APK artifact
+    - name: Upload Lint reports
       uses: actions/upload-artifact@v3
       with:
-        name: app-debug
-        path: app/build/outputs/apk/debug/app-debug.apk
+        name: lint-reports
+        path: app/build/reports/lint-results-debug.html
+        
+  # This job runs ONLY when you push a tag like 'v1.0.0'
+  release:
+    name: Create Release
+    needs: ci
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: 'gradle'
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Decode Keystore
+      env:
+        ENCODED_STRING: ${{ secrets.SIGNING_KEY_BASE64 }}
+      run: |
+        echo $ENCODED_STRING | base64 --decode > app/keystore.jks
+
+    - name: Assemble Release APK
+      env:
+        KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+        KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+      run: ./gradlew assembleRelease
+
+    - name: Create GitHub Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Release APK to Release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./app/build/outputs/apk/release/app-release-unsigned.apk # This path will need adjustment post-signing setup
+        asset_name: Kinesis-${{ github.ref }}.apk
+        asset_content_type: application/vnd.android.package-archive
